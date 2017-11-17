@@ -17,10 +17,9 @@
                password_confirmation: password,
                name: "サンプルユーザ#{n}",
                )
-               
+  Blog.create(
+    title: "投稿#{n}回目",
+    content: "中身#{n}回目",
+    user_id: n
+    
 end
-
-               
-               
-               
-   
