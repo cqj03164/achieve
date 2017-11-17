@@ -1,4 +1,7 @@
 class BlogsController < ApplicationController
+  
+before_action :authenticate_user!
+  
 before_action :set_blog, only: [:edit, :update, :destroy]
 
   def index
@@ -14,8 +17,9 @@ before_action :set_blog, only: [:edit, :update, :destroy]
   end  
   
   def create
-    Blog.create(blogs_params)
+   
     @blog = Blog.new(blogs_params)
+    @blog.user_id = current_user.id
     if @blog.save
       # 一覧画面へ遷移して"ブログを作成しました！"とメッセージを表示します。
       redirect_to blogs_path, notice: "ブログを作成しました！"
