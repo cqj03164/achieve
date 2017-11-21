@@ -50,3 +50,7 @@ gem 'rails_12factor', group: :production
 gem 'faker'
 gem 'devise'
 gem 'rails_admin'
+gem 'cancan'
+gem 'pry-rails'
+gem 'better_errors'
+gem 'activeresource' 

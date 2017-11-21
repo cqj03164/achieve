@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
 
 if Rails.env.development?
@@ -17,7 +18,11 @@ end
       post :confirm
    end
  end
-
+  resources :poems, only: [:index, :show] do
+    collection do
+      post :confirm
+   end
+ end
 
 
 
