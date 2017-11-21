@@ -30,6 +30,7 @@ def new
   def confirm
     @contact = Contact.new(contacts_params)
     render :new if @contact.invalid?
+    NoticeMailer.sendmail_contact(@contact).deliver
   end
   
   
