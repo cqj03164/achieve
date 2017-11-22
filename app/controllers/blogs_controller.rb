@@ -6,7 +6,6 @@ before_action :set_blog, only: [:edit, :update, :destroy]
 
   def index
       @blogs = Blog.all
-       raise
   end
   
   def new
