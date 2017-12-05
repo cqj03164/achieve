@@ -5,7 +5,7 @@
 
     <% @blogs.each do |blog| %>
  
-     <%= profile_img(blog.user) %>
+    
     
        <% end %>
     
@@ -17,8 +17,8 @@
           <h>内容</h>
       <p><%= blog.content %></p>
           <h>投稿者</h>
-          <%= profile_img(blog.user) %>
-      <p><%= blog.user.name if blog.user %></p>
+          
+      <p><%= profile_img(blog.user) %><%= blog.user.name if blog.user %></p>
      
       
 
