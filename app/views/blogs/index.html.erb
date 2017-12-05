@@ -17,6 +17,7 @@
           <h>内容</h>
       <p><%= blog.content %></p>
           <h>投稿者</h>
+          <%= profile_img(blog.user) %>
       <p><%= blog.user.name if blog.user %></p>
      
       
