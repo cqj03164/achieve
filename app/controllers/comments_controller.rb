@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
       else
         format.html { render :new }
       end
-    end
+  end
   
   def destroy
     @comment = Comment.find(params[:id])
@@ -24,16 +24,15 @@ class CommentsController < ApplicationController
       else
         format.html { render :new }
       end
-    end
-  end
-    
     
   end
+    
 
   private
     # ストロングパラメーター
     def comment_params
       params.require(:comment).permit(:blog_id, :content)
+　　end
+　end
 
-    end
-end
+
