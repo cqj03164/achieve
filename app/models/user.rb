@@ -9,7 +9,16 @@ class User < ActiveRecord::Base
          # CommentモデルのAssociationを設定
          has_many :comments, dependent: :destroy
          
-   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+         # dive16 relationでの設定
+         has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+         has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
+         
+         has_many :followed_users, through: :relationships, source: :followed
+         has_many :followers, through: :reverse_relationships, source: :follower
+
+
+         
+  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.find_by(provider: auth.provider, uid: auth.uid)
 
     unless user
@@ -27,7 +36,7 @@ class User < ActiveRecord::Base
     user
   end
 
-def self.find_for_twitter_oauth(auth, signed_in_resource = nil)
+  def self.find_for_twitter_oauth(auth, signed_in_resource = nil)
     user = User.find_by(provider: auth.provider, uid: auth.uid)
 
     unless user
@@ -43,13 +52,13 @@ def self.find_for_twitter_oauth(auth, signed_in_resource = nil)
       user.save
     end
     user
-end
+  end
 
-def self.create_unique_string
+ def self.create_unique_string
     SecureRandom.uuid
-end
+ end
          
-end
+
 
 def update_with_password(params, *options)
     if provider.blank?
@@ -59,3 +68,21 @@ def update_with_password(params, *options)
       update_without_password(params, *options)
     end
 end
+
+#指定のユーザをフォローする
+ def follow!(other_user)
+  relationships.create!(followed_id: other_user.id)
+ end
+
+#フォローしているかどうかを確認する
+ def following?(other_user)
+  relationships.find_by(followed_id: other_user.id)
+ end
+ 
+#指定のユーザのフォローを解除する
+ def unfollow!(other_user)
+  relationships.find_by(followed_id: other_user.id).destroy
+ end
+ 
+end 
+ 

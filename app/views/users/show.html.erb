@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+<div class="child row">
+  <div class="wrapper col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
+    <div class="blog-text">
+      <p class="left"><%= profile_img(@user) %></p>
+      <p class="left"><strong>ユーザー名</strong></p>
+      <p class="left"><%= @user.name %></p>
+
+      <p class="left"><strong>フォローしているユーザー</strong></p>
+      <% @user.followed_users.each do |followed| %>
+        <p class="left"><%= followed.name %></p>
+      <% end %>
+
+      <p class="left"><strong>フォロワーユーザー</strong></p>
+      <% @user.followers.each do |follower| %>
+        <p class="left"><%= follower.name %></p>
+      <% end %>
+
+    </div>
+    <%= link_to '戻る', users_path %>
+  </div>
+</div>
