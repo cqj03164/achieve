@@ -1,0 +1,23 @@
+<h2>お知らせ</h2>
+<ul>
+  <% @notifications.each do |notification| %>
+  <hr>
+    <li>
+     
+      <p><% unless notification.read %>未読<% end %></p>
+
+      <p>
+              <%= profile_img(notification.comment.user) %>
+        
+        <%= notification.comment.user.try(:name) %>さんが
+        あなたのブログ（<%= link_to "#{notification.comment.blog.title}", blog_path(notification.comment.blog, notification_id: notification.id) %>）にコメントしました。
+      </p>
+      <p><%= notification.created_at %></p>
+
+    <%= link_to '戻る', blogs_path %>
+
+    </li>
+  <% end %>
+</ul>
+
+
