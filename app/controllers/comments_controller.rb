@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       
       if @comment.save
-        format.html { redirect_to blog_comments_path(@blog), notice: 'コメントを投稿しました。' }
+        format.html { redirect_to blog_path(@blog), notice: 'コメントを投稿しました。' }
         format.js { render :index }
 
        unless @comment.blog.user_id == current_user.id
